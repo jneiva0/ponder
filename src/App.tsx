@@ -1,69 +1,37 @@
 import {
   Box,
   Container,
-  FormControl,
-  Input,
-  InputGroup,
-  InputRightElement,
-  Kbd,
+  HStack,
+  IconButton,
+  useColorMode,
+  useColorModeValue,
 } from '@chakra-ui/react'
-import { useHotkeys } from '@mantine/hooks'
-import { FormEventHandler, useRef, useState } from 'react'
+import { MdLightMode } from 'react-icons/md'
 import { CheckUser } from './components/CheckUser'
+import { CreateNote } from './components/CreateNote'
 import { NotesList } from './components/NotesList'
 
-type Item = {
-  text: string
-  createdAt: Date
-}
-
 function App() {
-  const [text, setText] = useState('')
-  const [itens, setItens] = useState<Item[]>([])
-
-  const inputRef = useRef<HTMLInputElement>(null)
-
-  useHotkeys([
-    [
-      'I',
-      () => {
-        console.log('I')
-        inputRef.current?.focus()
-      },
-    ],
-  ])
-
-  const onSubmit: FormEventHandler<HTMLFormElement> = ev => {
-    ev.preventDefault()
-    console.log(text)
-    setItens([...itens, { text, createdAt: new Date() }])
-    setText('')
-  }
-
+  const { toggleColorMode } = useColorMode()
   return (
     <CheckUser>
-      <Container pt={3}>
-        <form onSubmit={onSubmit}>
-          <FormControl>
-            <InputGroup>
-              <Input
-                noOfLines={2}
-                id='pad'
-                ref={inputRef}
-                placeholder={`Whats on your mind?`}
-                value={text}
-                onChange={e => setText(e.target.value)}
-              />
-              <InputRightElement>
-                <Kbd>I</Kbd>
-              </InputRightElement>
-            </InputGroup>
-          </FormControl>
-        </form>
-        <Box mt={4}>
-          <NotesList />
-        </Box>
-      </Container>
+      <Box h='full' bg={useColorModeValue('gray.100', 'gray.900')}>
+        <HStack pt={1} px={4} justify='right'>
+          <IconButton
+            variant='ghost'
+            onClick={toggleColorMode}
+            aria-label='color mode'
+            icon={<MdLightMode />}
+          />
+        </HStack>
+        <Container h='full' maxW='container.sm' pt={2}>
+          <CreateNote />
+
+          <Box mt={8}>
+            <NotesList />
+          </Box>
+        </Container>
+      </Box>
     </CheckUser>
   )
 }
