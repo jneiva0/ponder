@@ -1,4 +1,3 @@
-// 1. Import the extendTheme function
 import { extendTheme, ThemeConfig } from '@chakra-ui/react'
 
 const config: ThemeConfig = {
