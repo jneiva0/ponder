@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react'
 import { serverTimestamp } from 'firebase/firestore'
 import { useFormik } from 'formik'
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 import { useHotkeys } from 'react-hotkeys-hook'
 import TextareaAutosize from 'react-textarea-autosize'
 import * as yup from 'yup'
@@ -58,7 +58,7 @@ export const CreateNote = () => {
           ref={inputRef}
           value={formik.values.text}
           onChange={formik.handleChange}
-          placeholder={`Whats on your mind?`}
+          placeholder='O que você está pensando?'
           pr={8}
           maxLength={280}
           resize='none'

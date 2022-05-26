@@ -10,6 +10,7 @@ import {
 import { MdLightMode } from 'react-icons/md'
 import { CheckUser } from './components/CheckUser'
 import { CreateNote } from './components/CreateNote'
+import { Footer } from './components/Footer'
 import { NotesList } from './components/NotesList'
 import { logout } from './hooks/useUser'
 
@@ -17,7 +18,12 @@ function App() {
   const { toggleColorMode } = useColorMode()
   return (
     <CheckUser>
-      <Box h='full' bg={useColorModeValue('gray.100', 'gray.900')}>
+      <Box
+        display='flex'
+        minH='100vh'
+        flexDir='column'
+        bg={useColorModeValue('gray.100', 'gray.900')}
+      >
         <HStack pt={1} px={4} justify='right'>
           <IconButton
             variant='ghost'
@@ -29,13 +35,14 @@ function App() {
             Sair
           </Button>
         </HStack>
-        <Container h='full' maxW='container.sm' pt={2}>
+        <Container flex={1} maxW='container.sm' pt={2}>
           <CreateNote />
 
-          <Box mt={8}>
+          <Box flex={1} mt={8}>
             <NotesList />
           </Box>
         </Container>
+        <Footer />
       </Box>
     </CheckUser>
   )
