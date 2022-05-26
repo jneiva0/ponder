@@ -19,11 +19,14 @@ type Props = { note: Document<Note> }
 export const NoteItem = ({ note }: Props) => {
   const [timeAgo, setTimeAgo] = useState(() => dayjs(note.createdAt).fromNow())
 
-  const [isHovering, hoverProps] = useHover()
-  const { update, isValidating } = useNote(note.id)
+  const [isHovering, hoverProps] = useHover({
+    mouseEnterDelayMS: 0,
+    mouseLeaveDelayMS: 50,
+  })
+  const { deleteDocument } = useNote(note.id)
 
-  const archive = async () => {
-    await update({ isArchived: true })
+  const remove = async () => {
+    await deleteDocument()
   }
 
   useInterval(() => setTimeAgo(dayjs(note.createdAt).fromNow()), 5000)
@@ -43,7 +46,7 @@ export const NoteItem = ({ note }: Props) => {
       px={2}
     >
       <HStack p={2} align='start' justify='space-between'>
-        <Text>{note.text}</Text>
+        <Text whiteSpace='pre-line'>{note.text}</Text>
         <Text
           whiteSpace='nowrap'
           textAlign='right'
@@ -57,11 +60,11 @@ export const NoteItem = ({ note }: Props) => {
       <Collapse in={isHovering}>
         <HStack justify='right'>
           <IconButton
-            color='gray.600'
+            color={useColorModeValue('gray.600', 'gray.400')}
             variant='ghost'
             aria-label='delete'
             icon={<GoArchive />}
-            onClick={archive}
+            onClick={remove}
           />
         </HStack>
       </Collapse>

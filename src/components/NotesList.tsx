@@ -25,19 +25,16 @@ export const NotesList = () => {
     <Box>
       <Stack spacing={6}>
         <AnimatePresence>
-          {data?.map(
-            (doc, i) =>
-              !doc.isArchived && (
-                <motion.div
-                  initial={{ opacity: 0, y: 100 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, x: 200 }}
-                  key={doc.id}
-                >
-                  <NoteItem note={doc} />
-                </motion.div>
-              )
-          )}
+          {data?.map((doc, i) => (
+            <motion.div
+              initial={{ opacity: 0, y: 100 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, x: 200 }}
+              key={doc.id}
+            >
+              <NoteItem note={doc} />
+            </motion.div>
+          ))}
         </AnimatePresence>
       </Stack>
     </Box>

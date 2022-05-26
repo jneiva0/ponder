@@ -4,7 +4,6 @@ import { useUser } from './useUser'
 export type Note = {
   text: string
   createdAt: Date
-  isArchived: boolean
 }
 
 export const useNotes = () => {
@@ -13,7 +12,6 @@ export const useNotes = () => {
   const res = useCollection<Note>(`users/${user.uid}/notes`, {
     parseDates: ['createdAt'],
     orderBy: ['createdAt', 'desc'],
-    listen: true,
   })
 
   return res
