@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Container,
   HStack,
   IconButton,
@@ -10,6 +11,7 @@ import { MdLightMode } from 'react-icons/md'
 import { CheckUser } from './components/CheckUser'
 import { CreateNote } from './components/CreateNote'
 import { NotesList } from './components/NotesList'
+import { logout } from './hooks/useUser'
 
 function App() {
   const { toggleColorMode } = useColorMode()
@@ -23,6 +25,9 @@ function App() {
             aria-label='color mode'
             icon={<MdLightMode />}
           />
+          <Button variant='ghost' onClick={logout}>
+            Sair
+          </Button>
         </HStack>
         <Container h='full' maxW='container.sm' pt={2}>
           <CreateNote />
