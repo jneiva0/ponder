@@ -20,6 +20,7 @@
     "react-firebase-hooks": "^5.0.3",
     "react-hotkeys-hook": "^3.4.6",
     "react-icons": "^4.3.1",
+    "react-textarea-autosize": "^8.3.4",
     "swr-firestore-v9": "^1.0.5",
     "yup": "^0.32.11"
   },
