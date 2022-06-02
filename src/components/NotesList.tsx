@@ -23,7 +23,7 @@ export const NotesList = () => {
 
   return (
     <Box>
-      <Stack spacing={6}>
+      <Stack spacing={5}>
         <AnimatePresence>
           {data?.map((doc, i) => (
             <motion.div

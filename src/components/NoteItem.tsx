@@ -45,18 +45,20 @@ export const NoteItem = ({ note }: Props) => {
       py={2}
       px={2}
     >
-      <HStack p={2} align='start' justify='space-between'>
+      <Box p={2}>
         <Text whiteSpace='pre-line'>{note.text}</Text>
-        <Text
-          whiteSpace='nowrap'
-          textAlign='right'
-          fontWeight={400}
-          color='gray.500'
-          fontSize='sm'
-        >
-          {timeAgo}
-        </Text>
-      </HStack>
+      </Box>
+
+      <Text
+        px={2}
+        whiteSpace='nowrap'
+        textAlign='right'
+        fontWeight={400}
+        color='gray.500'
+        fontSize='sm'
+      >
+        {timeAgo}
+      </Text>
       <Collapse in={isHovering}>
         <HStack justify='right'>
           <IconButton

@@ -35,7 +35,7 @@ function App() {
             Sair
           </Button>
         </HStack>
-        <Container flex={1} maxW='container.sm' pt={2}>
+        <Container px={2} flex={1} maxW='container.sm' pt={2}>
           <CreateNote />
 
           <Box flex={1} mt={8}>
