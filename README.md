@@ -13,6 +13,7 @@ TODO
 - [x] Delete Note
 - [x] Multiline text input
 - [x] Increase Note text limit
+- [ ] Add option to collapse expand long Notes
 - [ ] Option to edit notes
 - [ ] Option to archive notes instead of permant delete
 - [ ] Sorting notes
