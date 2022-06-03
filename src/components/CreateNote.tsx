@@ -1,5 +1,7 @@
 import {
   Button,
+  CircularProgress,
+  CircularProgressLabel,
   Flex,
   InputGroup,
   InputRightElement,
@@ -8,7 +10,7 @@ import {
 } from '@chakra-ui/react'
 import { serverTimestamp } from 'firebase/firestore'
 import { useFormik } from 'formik'
-import { useRef } from 'react'
+import { useMemo, useRef } from 'react'
 import { useHotkeys } from 'react-hotkeys-hook'
 import TextareaAutosize from 'react-textarea-autosize'
 import * as yup from 'yup'
@@ -17,8 +19,10 @@ import { setupDayjs } from '../lib/dates'
 
 setupDayjs()
 
+const TEXT_LENGTH_LIMIT = 2000
+
 const schema = yup.object().shape({
-  text: yup.string().required(),
+  text: yup.string().required().max(TEXT_LENGTH_LIMIT),
 })
 
 export const CreateNote = () => {
@@ -47,6 +51,20 @@ export const CreateNote = () => {
     inputRef.current?.focus()
   })
 
+  const remainingCharacters = useMemo(
+    () => TEXT_LENGTH_LIMIT - formik.values.text.length,
+    [formik.values.text]
+  )
+
+  const percentUsed = useMemo(
+    () => (formik.values.text.length / TEXT_LENGTH_LIMIT) * 100,
+    [formik.values.text]
+  )
+
+  const isNearExceeding = useMemo(
+    () => remainingCharacters <= 50,
+    [remainingCharacters]
+  )
   return (
     <form onSubmit={formik.handleSubmit}>
       <InputGroup>
@@ -60,7 +78,6 @@ export const CreateNote = () => {
           onChange={formik.handleChange}
           placeholder='O que você está pensando?'
           pr={8}
-          maxLength={280}
           resize='none'
           wrap='hard'
           minH={1}
@@ -70,9 +87,26 @@ export const CreateNote = () => {
         </InputRightElement>
       </InputGroup>
 
-      {formik.dirty && formik.isValid && (
-        <Flex mt={2} justifyContent='end'>
-          <Button colorScheme='blue' type='submit'>
+      {formik.dirty && (
+        <Flex align='center' justify='end' mt={2}>
+          <CircularProgress
+            color={isNearExceeding ? 'orange.500' : 'blue.500'}
+            size={isNearExceeding ? 10 : 8}
+            mr={5}
+            value={percentUsed}
+          >
+            {isNearExceeding && (
+              <CircularProgressLabel fontSize='sm' fontWeight='400'>
+                {remainingCharacters}
+              </CircularProgressLabel>
+            )}
+          </CircularProgress>
+          <Button
+            isDisabled={!formik.isValid}
+            isLoading={formik.isSubmitting}
+            colorScheme='blue'
+            type='submit'
+          >
             Adicionar
           </Button>
         </Flex>

@@ -12,6 +12,7 @@ TODO
 - [x] Create Note
 - [x] Delete Note
 - [x] Multiline text input
+- [x] Increase Note text limit
 - [ ] Option to edit notes
 - [ ] Option to archive notes instead of permant delete
 - [ ] Sorting notes
