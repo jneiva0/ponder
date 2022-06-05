@@ -1,4 +1,4 @@
-Ponder is a PWA that aims to be a quick and easy way to save notes, quotes, thoughs or anything you want to write.
+Ponder is a PWA that aims to be a quick and easy way to save notes, quotes, toughts or anything you want to write.
 
 You can access the live version on https://ponder.jneiva.dev
 
