@@ -8,7 +8,7 @@ import {
   useInterval,
 } from '@chakra-ui/react'
 import dayjs from 'dayjs'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { GoArchive } from 'react-icons/go'
 import { Document } from 'swr-firestore-v9'
 import { useHover } from '../hooks/useHover'
@@ -18,6 +18,11 @@ type Props = { note: Document<Note> }
 
 export const NoteItem = ({ note }: Props) => {
   const [timeAgo, setTimeAgo] = useState(() => dayjs(note.createdAt).fromNow())
+
+  const date = useMemo(
+    () => dayjs(note.createdAt).format('ddd, MMM D, YYYY h:mm A'),
+    [note.createdAt]
+  )
 
   const [isHovering, hoverProps] = useHover({
     mouseEnterDelayMS: 0,
@@ -57,7 +62,7 @@ export const NoteItem = ({ note }: Props) => {
         color='gray.500'
         fontSize='sm'
       >
-        {timeAgo}
+        {timeAgo} - {date}
       </Text>
       <Collapse in={isHovering}>
         <HStack justify='right'>
