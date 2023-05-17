@@ -10,6 +10,7 @@ import {
 import { MdLightMode } from 'react-icons/md'
 import { CheckUser } from './components/CheckUser'
 import { CreateNote } from './components/CreateNote'
+import { ExportButton } from './components/ExportButton'
 import { Footer } from './components/Footer'
 import { NotesList } from './components/NotesList'
 import { logout } from './hooks/useUser'
@@ -31,6 +32,7 @@ function App() {
             aria-label='color mode'
             icon={<MdLightMode />}
           />
+          <ExportButton />
           <Button variant='ghost' onClick={logout}>
             Sair
           </Button>
